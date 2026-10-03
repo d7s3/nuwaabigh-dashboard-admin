@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>لوحة متابعة اجتماع 2 أكتوبر | نوابغ المستقبل</title>
+<style>
+:root {
+  --bg:#f5f7f8; --card:#fff; --text:#17322f; --muted:#6d7d79; --line:#e6ecea;
+  --brand:#0f766e; --brand2:#115e59; --gold:#b9923c; --danger:#b42318; --warn:#b54708;
+  --ok:#067647; --shadow:0 8px 24px rgba(16,42,40,.07);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{background:linear-gradient(135deg,var(--brand2),var(--brand));color:white;padding:28px 18px 34px}
+.wrap{max-width:1280px;margin:auto}
+.header-row{display:flex;gap:18px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+h1{margin:0;font-size:clamp(24px,4vw,42px)}
+.subtitle{margin:8px 0 0;opacity:.88;line-height:1.8}
+.badge-date{background:rgba(255,255,255,.14);padding:10px 14px;border-radius:999px;font-weight:700}
+main{padding:22px 16px 50px}
+.cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:-22px}
+.card{background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:18px;padding:16px}
+.metric .num{font-size:30px;font-weight:800}
+.metric .label{font-size:13px;color:var(--muted);margin-top:4px}
+.progressbar{height:9px;border-radius:999px;background:#e9efed;overflow:hidden;margin-top:10px}
+.progressbar>span{display:block;height:100%;background:var(--brand);width:0}
+.toolbar{margin-top:18px;display:grid;grid-template-columns:2fr repeat(4,1fr);gap:10px}
+input,select,button,textarea{font:inherit}
+input,select{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:12px;background:white}
+button{border:0;border-radius:12px;padding:10px 13px;cursor:pointer}
+.btn{background:var(--brand);color:#fff}
+.btn-light{background:#eef5f3;color:var(--brand2)}
+.section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:26px 0 12px}
+.section-title h2{margin:0;font-size:21px}
+.table-wrap{background:white;border:1px solid var(--line);border-radius:18px;overflow:auto;box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:1050px}
+th,td{padding:12px 11px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+th{background:#f8fbfa;font-size:13px;color:#566863;position:sticky;top:0;z-index:1}
+tr:hover td{background:#fbfdfc}
+.status{font-weight:700}
+.status[data-s="done"]{color:var(--ok)}
+.status[data-s="progress"]{color:var(--warn)}
+.status[data-s="blocked"]{color:var(--danger)}
+.priority{display:inline-block;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:700}
+.priority.high{background:#fff1f0;color:#b42318}
+.priority.med{background:#fff7e6;color:#b54708}
+.priority.low{background:#eef5f3;color:#067647}
+.task-title{font-weight:700;line-height:1.6}
+.muted{color:var(--muted);font-size:13px}
+.status-select{min-width:118px;padding:8px;border-radius:10px}
+.note-btn{background:#f1f5f4;color:#1e4d47}
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.kpi{background:white;border:1px solid var(--line);border-radius:16px;padding:14px}
+.kpi strong{font-size:24px}
+.kpi small{display:block;color:var(--muted);margin-top:5px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:center;justify-content:center;padding:16px;z-index:10}
+.modal.show{display:flex}
+.modal-card{background:white;border-radius:18px;width:min(620px,100%);padding:20px;box-shadow:0 30px 60px rgba(0,0,0,.18)}
+.modal-card h3{margin-top:0}
+textarea{width:100%;min-height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;resize:vertical}
+.modal-actions{display:flex;gap:8px;justify-content:flex-start;margin-top:12px}
+.empty{text-align:center;padding:36px;color:var(--muted)}
+.footer-note{margin-top:18px;color:var(--muted);font-size:13px;line-height:1.8}
+@media(max-width:900px){
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .toolbar{grid-template-columns:1fr 1fr}
+  .toolbar .search{grid-column:1/-1}
+  .kpi-grid{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .cards{grid-template-columns:1fr}
+  .toolbar{grid-template-columns:1fr}
+}
+@media print{
+  header{background:white;color:#000;padding:0 0 14px}
+  .cards{margin-top:0}
+  .toolbar,.note-btn,.modal,.footer-note{display:none!important}
+  body{background:white}
+  .card,.table-wrap{box-shadow:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap header-row">
+    <div>
+      <h1>لوحة متابعة الاجتماع الأول</h1>
+      <div class="subtitle">برنامج نوابغ المستقبل — تحويل قرارات اجتماع 2 أكتوبر إلى مهام قابلة للقياس والمتابعة.</div>
+    </div>
+    <div class="badge-date">2 أكتوبر 2026</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="cards">
+    <div class="card metric"><div class="num" id="mTotal">0</div><div class="label">إجمالي المهام</div></div>
+    <div class="card metric"><div class="num" id="mDone">0</div><div class="label">مكتملة</div></div>
+    <div class="card metric"><div class="num" id="mProgress">0</div><div class="label">قيد التنفيذ</div></div>
+    <div class="card metric"><div class="num" id="mBlocked">0</div><div class="label">متعطلة</div></div>
+    <div class="card metric">
+      <div class="num" id="mPercent">0%</div><div class="label">نسبة الإنجاز</div>
+      <div class="progressbar"><span id="progressFill"></span></div>
+    </div>
+  </section>
+
+  <section class="toolbar">
+    <input class="search" id="search" placeholder="ابحث في المهمة، المسؤول، المخرج...">
+    <select id="ownerFilter"><option value="">كل المسؤولين</option></select>
+    <select id="categoryFilter"><option value="">كل المحاور</option></select>
+    <select id="statusFilter">
+      <option value="">كل الحالات</option>
+      <option value="todo">لم يبدأ</option>
+      <option value="progress">قيد التنفيذ</option>
+      <option value="done">مكتمل</option>
+      <option value="blocked">متعطل</option>
+    </select>
+    <select id="priorityFilter">
+      <option value="">كل الأولويات</option>
+      <option value="عالية">عالية</option>
+      <option value="متوسطة">متوسطة</option>
+      <option value="منخفضة">منخفضة</option>
+    </select>
+  </section>
+
+  <div class="section-title">
+    <h2>المهام التنفيذية</h2>
+    <div>
+      <button class="btn-light" onclick="window.print()">طباعة التقرير</button>
+      <button class="btn" onclick="exportData()">تصدير البيانات</button>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th><th>المهمة</th><th>المحور</th><th>المسؤول</th>
+          <th>الموعد</th><th>المخرج المطلوب</th><th>الأولوية</th><th>الحالة</th><th>ملاحظات</th>
+        </tr>
+      </thead>
+      <tbody id="taskBody"></tbody>
+    </table>
+    <div class="empty" id="empty" style="display:none">لا توجد مهام مطابقة للفلاتر الحالية.</div>
+  </div>
+
+  <div class="section-title"><h2>مؤشرات تشغيلية للاجتماع القادم</h2></div>
+  <section class="kpi-grid">
+    <div class="kpi"><strong>100%</strong><small>الطلاب المسجلون في المنصة</small></div>
+    <div class="kpi"><strong>100%</strong><small>الطلاب الذين لديهم هدف قرآني مكتوب</small></div>
+    <div class="kpi"><strong>100%</strong><small>المعلمين الذين حضّروا الدرس مسبقًا</small></div>
+    <div class="kpi"><strong>0</strong><small>مشكلات تشغيلية متكررة دون مالك واضح</small></div>
+    <div class="kpi"><strong>يومي</strong><small>متابعة الغياب والتأخر والاستئذان</small></div>
+    <div class="kpi"><strong>أسبوعي</strong><small>تحديث السجل التربوي لكل طالب</small></div>
+  </section>
+
+  <p class="footer-note">
+    تحفظ حالات المهام والملاحظات تلقائيًا في هذا المتصفح باستخدام التخزين المحلي. عند فتح الموقع من جهاز آخر ستبدأ الحالة من جديد ما لم تُربط لاحقًا بقاعدة بيانات أو Google Sheets.
+  </p>
+</main>
+
+<div class="modal" id="noteModal" onclick="closeIfBackdrop(event)">
+  <div class="modal-card">
+    <h3 id="noteTitle">ملاحظات المهمة</h3>
+    <textarea id="noteText" placeholder="اكتب آخر تحديث، سبب التعثر، القرار المطلوب، أو ما تم إنجازه..."></textarea>
+    <div class="modal-actions">
+      <button class="btn" onclick="saveNote()">حفظ</button>
+      <button class="btn-light" onclick="closeModal()">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const TASKS = [{"id": 1, "title": "إعداد جدول الشهر", "owner": "السميري + مصعب + اللجان", "deadline": "عاجل", "output": "جدول شهري معتمد", "category": "الجدول والبرنامج", "priority": "عالية"}, {"id": 2, "title": "إطلاق المنصة", "owner": "السميري", "deadline": "اليوم", "output": "المنصة مفعلة", "category": "المنصة والمتابعة", "priority": "عالية"}, {"id": 3, "title": "تسجيل الطلاب في المنصة", "owner": "المعلمون", "deadline": "اليوم", "output": "تسجيل 100% من الطلاب", "category": "المنصة والمتابعة", "priority": "عالية"}, {"id": 4, "title": "بناء الأهداف القرآنية لكل طالب", "owner": "المعلمون", "deadline": "هذا الأسبوع", "output": "هدف شهري وفصلي + ورد حفظ ومراجعة", "category": "المسار القرآني", "priority": "عالية"}, {"id": 5, "title": "التواصل مع بشير لتوفير معلم قرآني إضافي", "owner": "القرعاني", "deadline": "عاجل", "output": "تأكيد المعلم وآلية الحضور", "category": "المسار القرآني", "priority": "عالية"}, {"id": 6, "title": "اعتماد أوقات المقصف لكل مرحلة", "owner": "القرعاني + الإدارة", "deadline": "مع اعتماد الجدول", "output": "أوقات واضحة ضمن الجدول", "category": "المقصف والخدمات", "priority": "عالية"}, {"id": 7, "title": "تحسين نوعية المأكولات في المقصف", "owner": "القرعاني", "deadline": "هذا الأسبوع", "output": "خيارات مناسبة ومعتمدة", "category": "المقصف والخدمات", "priority": "متوسطة"}, {"id": 8, "title": "توفير برادة مياه", "owner": "القرعاني", "deadline": "عاجل", "output": "برادة تعمل وموقعها معتمد", "category": "المقصف والخدمات", "priority": "عالية"}, {"id": 9, "title": "تنظيم موضوع الزمزميات والشعارات", "owner": "القرعاني", "deadline": "هذا الأسبوع", "output": "تعميم + تصور للطباعة", "category": "المقصف والخدمات", "priority": "متوسطة"}, {"id": 10, "title": "اعتماد جدول المرافق مع المدرسة", "owner": "السميري + مصعب", "deadline": "عاجل", "output": "جدول مرافق معتمد مع صادق النور", "category": "المرافق والتجهيزات", "priority": "عالية"}, {"id": 11, "title": "إعداد الحقائب التعليمية مسبقًا", "owner": "السميري", "deadline": "أسبوعيًا مسبقًا", "output": "حقائب المحتوى جاهزة", "category": "المحتوى العلمي", "priority": "عالية"}, {"id": 12, "title": "طباعة وتسليم المواد التعليمية", "owner": "القرعاني", "deadline": "قبل كل درس", "output": "المواد لدى المعلمين", "category": "المحتوى العلمي", "priority": "عالية"}, {"id": 13, "title": "إضافة نموذج تحضير المعلم للدرس في التطبيق", "owner": "السميري", "deadline": "عاجل", "output": "نموذج إلكتروني فعال", "category": "المحتوى العلمي", "priority": "عالية"}, {"id": 14, "title": "متابعة تحضير المعلمين للدروس", "owner": "القرعاني", "deadline": "يومي", "output": "متابعة ونسبة التزام", "category": "المحتوى العلمي", "priority": "عالية"}, {"id": 15, "title": "تفعيل الحضور الإلكتروني للمعلمين", "owner": "السميري + القرعاني", "deadline": "فوري", "output": "سجل حضور إلكتروني", "category": "الحضور والانضباط", "priority": "عالية"}, {"id": 16, "title": "إنشاء مسابقة الحضور المبكر", "owner": "القرعاني", "deadline": "هذا الشهر", "output": "ضوابط وجوائز وآلية متابعة", "category": "الحضور والانضباط", "priority": "متوسطة"}, {"id": 17, "title": "تصميم وطباعة كرت الاستئذان", "owner": "القرعاني", "deadline": "عاجل", "output": "كرت/نموذج معتمد", "category": "الاستئذان والانصراف", "priority": "عالية"}, {"id": 18, "title": "تفعيل رسائل الغياب والتأخر الرسمية", "owner": "القرعاني", "deadline": "يومي", "output": "رسائل منتظمة ومؤرشفة", "category": "التواصل مع الأسرة", "priority": "عالية"}, {"id": 19, "title": "استخراج رقم رسمي للبرنامج", "owner": "السميري", "deadline": "عاجل", "output": "رقم مخصص للبرنامج", "category": "التواصل مع الأسرة", "priority": "عالية"}, {"id": 20, "title": "إعداد خطة رحلات الشهر", "owner": "مصعب", "deadline": "هذا الأسبوع", "output": "جدول رحلات شهري", "category": "الأنشطة والبرامج", "priority": "عالية"}, {"id": 21, "title": "إعداد خطة أنشطة الخميس والكادر الخارجي", "owner": "مصعب", "deadline": "هذا الأسبوع", "output": "جدول مقدمين وبرامج", "category": "الأنشطة والبرامج", "priority": "متوسطة"}, {"id": 22, "title": "اقتراح بدائل مناسبة للمرحلة المتوسطة", "owner": "مصعب", "deadline": "عاجل", "output": "قائمة برامج معتمدة", "category": "الأنشطة والبرامج", "priority": "عالية"}, {"id": 23, "title": "إعداد المسابقة القرآنية", "owner": "مصعب", "deadline": "هذا الشهر", "output": "آلية المسابقة", "category": "المسابقات والتحفيز", "priority": "متوسطة"}, {"id": 24, "title": "إعداد مسابقة الأسر", "owner": "مصعب", "deadline": "هذا الشهر", "output": "آلية المسابقة", "category": "المسابقات والتحفيز", "priority": "متوسطة"}, {"id": 25, "title": "التأكد من وجود أولياء الأمور في القروبات", "owner": "القرعاني", "deadline": "عاجل", "output": "اكتمال جميع القروبات", "category": "التواصل مع الأسرة", "priority": "عالية"}, {"id": 26, "title": "إنشاء قروب طلاب المتوسطة", "owner": "مصعب", "deadline": "عاجل", "output": "القروب منشأ ومنظم", "category": "التواصل مع الأسرة", "priority": "متوسطة"}, {"id": 27, "title": "متابعة صيانة الصالة الرياضية", "owner": "السميري", "deadline": "عاجل", "output": "إغلاق ملاحظات الصيانة", "category": "المرافق والتجهيزات", "priority": "عالية"}, {"id": 28, "title": "حصر وشراء احتياجات الصالة", "owner": "القرعاني", "deadline": "حسب الحصر", "output": "المشتريات متوفرة", "category": "المرافق والتجهيزات", "priority": "متوسطة"}, {"id": 29, "title": "حل مشكلة السبورات التقنية", "owner": "السميري", "deadline": "عاجل", "output": "السبورات تعمل", "category": "المرافق والتجهيزات", "priority": "عالية"}, {"id": 30, "title": "توفير لابتوب للفصول المحتاجة", "owner": "السميري", "deadline": "حسب الحاجة", "output": "الأجهزة متوفرة", "category": "المرافق والتجهيزات", "priority": "متوسطة"}, {"id": 31, "title": "توفير الإسعافات الأولية", "owner": "القرعاني", "deadline": "عاجل", "output": "حقيبة إسعافات مجهزة", "category": "السلامة والصحة", "priority": "عالية"}, {"id": 32, "title": "توفير المناديل وتوزيعها", "owner": "القرعاني", "deadline": "عاجل", "output": "متوفرة في المواقع المطلوبة", "category": "المقصف والخدمات", "priority": "متوسطة"}, {"id": 33, "title": "توفير ريموتات المكيف للفصول", "owner": "القرعاني", "deadline": "عاجل", "output": "ريموت لكل فصل/معلم", "category": "المرافق والتجهيزات", "priority": "متوسطة"}, {"id": 34, "title": "متابعة النظافة وتسجيل الملاحظات", "owner": "محمد رفيق + القرعاني", "deadline": "يومي", "output": "سجل ملاحظات ومعالجة", "category": "النظافة", "priority": "متوسطة"}, {"id": 35, "title": "مراجعة الحالة الصحية لكل طالب", "owner": "المعلمون", "deadline": "عاجل", "output": "مراجعة بيانات 100% من الطلاب", "category": "السلامة والصحة", "priority": "عالية"}, {"id": 36, "title": "إضافة سياسة البرنامج والشروط في التطبيق", "owner": "السميري", "deadline": "عاجل", "output": "موافقة إلكترونية على الشروط", "category": "السياسات", "priority": "عالية"}, {"id": 37, "title": "حصر مقاسات الزي والاستعداد للطلب", "owner": "القرعاني", "deadline": "مستمر", "output": "قائمة مقاسات مكتملة", "category": "الزي", "priority": "متوسطة"}, {"id": 38, "title": "توزيع المهام داخل كل لجنة", "owner": "الإدارة + اللجان", "deadline": "عاجل", "output": "توصيف واضح للمسؤوليات", "category": "الحوكمة والمهام", "priority": "عالية"}, {"id": 39, "title": "إدخال تقييم أسبوعي لكل طالب", "owner": "المعلمون", "deadline": "أسبوعي", "output": "سجل تربوي محدث", "category": "التقييم التربوي", "priority": "عالية"}, {"id": 40, "title": "إرسال الجدول الأسبوعي لأولياء الأمور", "owner": "القرعاني", "deadline": "أسبوعي", "output": "إرسال لجميع الأسر", "category": "التواصل مع الأسرة", "priority": "عالية"}, {"id": 41, "title": "متابعة الانصراف المباشر للمعلمين والطلاب", "owner": "القرعاني + المعلمون", "deadline": "يومي", "output": "انصراف منظم دون تأخير", "category": "الاستئذان والانصراف", "priority": "عالية"}, {"id": 42, "title": "تنظيم دخول وخروج الطلاب من باب الملعب", "owner": "القرعاني", "deadline": "عاجل", "output": "إعلان الباب المعتمد وتصويره للقروبات", "category": "الحضور والانضباط", "priority": "عالية"}, {"id": 43, "title": "ضبط الجوالات لدى الطلاب", "owner": "المعلمون", "deadline": "يومي", "output": "استلام عند الدخول وتسليم عند الانصراف", "category": "الانضباط الطلابي", "priority": "متوسطة"}, {"id": 44, "title": "ضبط انتقال الطلاب بين المرافق", "owner": "المعلمون", "deadline": "يومي", "output": "انتقال منظم برفقة المعلم", "category": "الانضباط الطلابي", "priority": "عالية"}, {"id": 45, "title": "إعداد ركن وضيافة للمعلمين", "owner": "الإدارة", "deadline": "هذا الأسبوع", "output": "ركن بسيط ومجهز", "category": "دعم المعلمين", "priority": "منخفضة"}];
+const STORAGE_KEY = "nuwaabigh_oct2_dashboard_v1";
+let state = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+let noteTaskId = null;
+
+function getTaskState(id) {
+  return state[id] || {status:"todo", note:""};
+}
+function saveState() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+}
+function priorityClass(p) {
+  return p === "عالية" ? "high" : p === "متوسطة" ? "med" : "low";
+}
+function statusLabel(s) {
+  return ({todo:"لم يبدأ",progress:"قيد التنفيذ",done:"مكتمل",blocked:"متعطل"})[s] || "لم يبدأ";
+}
+function populateFilters() {
+  const owners = [...new Set(TASKS.flatMap(t => t.owner.split("+").map(x=>x.trim())).filter(Boolean))].sort();
+  const cats = [...new Set(TASKS.map(t=>t.category))].sort();
+  document.getElementById("ownerFilter").innerHTML += owners.map(x=>`<option>${esc(x)}</option>`).join("");
+  document.getElementById("categoryFilter").innerHTML += cats.map(x=>`<option>${esc(x)}</option>`).join("");
+}
+function filteredTasks() {
+  const q = document.getElementById("search").value.trim().toLowerCase();
+  const owner = document.getElementById("ownerFilter").value;
+  const cat = document.getElementById("categoryFilter").value;
+  const status = document.getElementById("statusFilter").value;
+  const priority = document.getElementById("priorityFilter").value;
+  return TASKS.filter(t => {
+    const s = getTaskState(t.id).status;
+    const hay = `${t.title} ${t.owner} ${t.output} ${t.category} ${t.deadline}`.toLowerCase();
+    return (!q || hay.includes(q))
+      && (!owner || t.owner.includes(owner))
+      && (!cat || t.category === cat)
+      && (!status || s === status)
+      && (!priority || t.priority === priority);
+  });
+}
+function render() {
+  const rows = filteredTasks();
+  const body = document.getElementById("taskBody");
+  body.innerHTML = rows.map(t => {
+    const st = getTaskState(t.id);
+    const noteMark = st.note ? "● يوجد تحديث" : "إضافة";
+    return `<tr>
+      <td>${t.id}</td>
+      <td><div class="task-title">${esc(t.title)}</div></td>
+      <td><span class="muted">${esc(t.category)}</span></td>
+      <td>${esc(t.owner)}</td>
+      <td>${esc(t.deadline)}</td>
+      <td>${esc(t.output)}</td>
+      <td><span class="priority ${priorityClass(t.priority)}">${esc(t.priority)}</span></td>
+      <td>
+        <select class="status-select status" data-s="${st.status}" onchange="changeStatus(${t.id},this)">
+          <option value="todo" ${st.status==="todo"?"selected":""}>لم يبدأ</option>
+          <option value="progress" ${st.status==="progress"?"selected":""}>قيد التنفيذ</option>
+          <option value="done" ${st.status==="done"?"selected":""}>مكتمل</option>
+          <option value="blocked" ${st.status==="blocked"?"selected":""}>متعطل</option>
+        </select>
+      </td>
+      <td><button class="note-btn" onclick="openNote(${t.id})">${noteMark}</button></td>
+    </tr>`;
+  }).join("");
+  document.getElementById("empty").style.display = rows.length ? "none" : "block";
+  updateMetrics();
+}
+function changeStatus(id, el) {
+  state[id] = state[id] || {status:"todo",note:""};
+  state[id].status = el.value;
+  el.dataset.s = el.value;
+  saveState(); render();
+}
+function updateMetrics() {
+  const total = TASKS.length;
+  const vals = TASKS.map(t=>getTaskState(t.id).status);
+  const done = vals.filter(x=>x==="done").length;
+  const progress = vals.filter(x=>x==="progress").length;
+  const blocked = vals.filter(x=>x==="blocked").length;
+  const percent = Math.round(done/total*100);
+  mTotal.textContent = total; mDone.textContent = done; mProgress.textContent = progress; mBlocked.textContent = blocked;
+  mPercent.textContent = percent+"%"; progressFill.style.width = percent+"%";
+}
+function openNote(id) {
+  noteTaskId = id;
+  const t = TASKS.find(x=>x.id===id);
+  noteTitle.textContent = "ملاحظات: " + t.title;
+  noteText.value = getTaskState(id).note || "";
+  noteModal.classList.add("show");
+  setTimeout(()=>noteText.focus(),50);
+}
+function closeModal() { noteModal.classList.remove("show"); noteTaskId=null; }
+function closeIfBackdrop(e) { if(e.target.id==="noteModal") closeModal(); }
+function saveNote() {
+  if(noteTaskId==null) return;
+  state[noteTaskId] = state[noteTaskId] || {status:"todo",note:""};
+  state[noteTaskId].note = noteText.value.trim();
+  saveState(); closeModal(); render();
+}
+function exportData() {
+  const payload = TASKS.map(t => ({...t, ...getTaskState(t.id), status_label:statusLabel(getTaskState(t.id).status)}));
+  const blob = new Blob([JSON.stringify(payload,null,2)],{type:"application/json;charset=utf-8"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = "متابعة-اجتماع-2-اكتوبر.json"; a.click(); URL.revokeObjectURL(a.href);
+}
+["search","ownerFilter","categoryFilter","statusFilter","priorityFilter"].forEach(id =>
+  document.getElementById(id).addEventListener("input", render)
+);
+populateFilters(); render();
+</script>
+</body>
+</html>
